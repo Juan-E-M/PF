@@ -15,7 +15,7 @@
                             <v-col cols="12" sm="4">
                                 <v-img
                                     style="border-radius: 7px"
-                                    src="https://ssluxurycars.ae/wp-content/uploads/2021/03/Qualities-of-a-Good-PC-Gaming-Store-ssluxurycars.jpg"
+                                    :src="negocio.imagen_negocio"
                                     class="align-center align-self-center"
                                 ></v-img>
                             </v-col>

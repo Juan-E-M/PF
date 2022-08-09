@@ -156,20 +156,26 @@ class NegocioController extends Controller
         return $productos;
     }
     public function pro_neg($id){
-        $comentarios = ComentarioNegocio::with('usuarios')->where('negocio_id',$id)->get();
+
+        $comentarios = ComentarioNegocio::with('usuarios')->where('negocio_id',$id)->
+            orderBy('created_at','DESC')->get();
         return $comentarios;
     }
     public function post_com(Request  $request){
         $coment = new ComentarioNegocio();
 
-        $file_name = time().'_'.$request->imagen->getClientOriginalName();
-        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
         $coment->usuario_id = $request->input('usuario_id');
         $coment->negocio_id = $request->input('negocio_id');
         $coment->subtema = $request->input('subtema');
         $coment->valoracion = $request->input('valoracion');
         $coment->texto_comentario = $request->input('descripcion');
-        $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+
+        if($request->hasFile('imagen')){
+            $file_name = time().'_'.$request->imagen->getClientOriginalName();
+            $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+            $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        }
+
         $coment->save();
         return '{"msg":"comentado"}';
     }

@@ -26,7 +26,7 @@
                         </v-card-title>
 
                         <v-card-subtitle>
-                            <b>Usuario: </b> {{i.usuario.nombre}}
+                            <b>Usuario: </b> {{i.usuario.username}}
                         </v-card-subtitle>
 
                         <!--Calificacion del usuario-->
@@ -100,7 +100,7 @@
                             </template>
 
                             <template v-else>
-                                <v-card-text>No hay imagenes.</v-card-text>
+                                <v-card-text>--------------</v-card-text>
                             </template>
                         </v-sheet>
                     </v-card>

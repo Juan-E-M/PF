@@ -87,19 +87,25 @@ class ProductoController extends Controller
         return $productos;
     }
     public function pro_com($id){
-        $comentarios = ComentarioProducto::with('usuarios')->where('producto_id',$id)->get();
+        $comentarios = ComentarioProducto::with('usuarios')->where('producto_id',$id)->
+        orderBy('created_at','DESC')->get();
         return $comentarios;
     }
     public function post_com(Request  $request){
         $coment = new ComentarioProducto();
-        $file_name = time().'_'.$request->imagen->getClientOriginalName();
-        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+
         $coment->usuario_id = $request->input('usuario_id');
         $coment->producto_id = $request->input('producto_id');
         $coment->subtema = $request->input('subtema');
         $coment->valoracion = $request->input('valoracion');
         $coment->texto_comentario = $request->input('descripcion');
-        $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+
+        if($request->hasFile('imagen')){
+            $file_name = time().'_'.$request->imagen->getClientOriginalName();
+            $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+            $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        }
+
         $coment->save();
         return '{"msg":"actualizado"}';
     }

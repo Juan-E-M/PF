@@ -8,10 +8,13 @@
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="text-h6">
-                        Usuario
+                        ¡Bienvenido!
+                    </v-list-item-title>
+                    <v-list-item-title class="text-h6">
+                        {{user}}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        usuario@gmail.com
+                        {{ email }}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -89,7 +92,16 @@
 
 <script>
 import router from "@/router";
+import axios from "axios";
 export default {
+    async created(){
+        const user = JSON.parse(window.localStorage.getItem('user'))
+        const res = await axios.get('http://localhost:8000/usuario/vue/one/'+user._id)
+        console.log(user)
+        this.user=res.data[0].username
+        this.email=res.data[0].email
+        //console.log(user._id)
+    },
     data: () => ({
         drawer: null,
         items: [
@@ -104,6 +116,8 @@ export default {
             'Acerca de',
             'Contáctanos'
         ],
+        user:'',
+        email:''
     }),
     methods: {
         logout () {

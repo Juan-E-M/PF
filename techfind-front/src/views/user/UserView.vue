@@ -19,21 +19,24 @@
                 <v-row style="height: 15vh" align="center">
                     <v-col class="d-flex justify-center">
                         <div>
-                            <div style="text-align: center">
-                                <h2>{{this.nombre}}</h2>
-                                <p>{{this.emaiil}}</p>
+                            <div style="text-align: center" class="d-flex mt-5">
+                                <div class="mr-3">
+                                    <h2>{{this.nombre}}</h2>
+                                    <p>{{this.emaiil}}</p>
+                                </div>
+                                <div class="my-2">
+                                    <v-btn
+                                        color="primary"
+                                        dark
+                                        class="mr-3"
+                                        @click="go"
+                                    >
+
+                                        <v-icon>mdi-account-edit</v-icon>
+                                    </v-btn>
+                                </div>
                             </div>
-                            <div class="my-2">
-                                <v-btn
-                                    color="primary"
-                                    dark
-                                    class="mr-3"
-                                    @click="go"
-                                >
-                                    Editar perfil
-                                    <v-icon style="margin-left: 15px">mdi-account-edit</v-icon>
-                                </v-btn>
-                            </div>
+
                         </div>
                     </v-col>
                 </v-row>
@@ -46,9 +49,6 @@
             >
                 <v-tab to="/user/posts">
                     <v-icon>mdi-comment-multiple</v-icon>
-                </v-tab>
-                <v-tab to="/user/photos">
-                    <v-icon>mdi-image-multiple</v-icon>
                 </v-tab>
             </v-tabs>
 
